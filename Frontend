@@ -1,0 +1,565 @@
+Here is the **complete, cleaned, and fully functional frontend code** based on your original HTML, incorporating the fixes and best practices discussed:
+
+- Removed the Cloudflare challenge script.
+- Fixed the WhatsApp URL (removed extra spaces).
+- Kept all styling and interactivity intact.
+- No backend dependency – fully client-side.
+
+---
+
+### ✅ **Full Frontend Code (`index.html`)**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ami Technology - IT Training & Support</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    .gradient-bg {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    .chat-bubble {
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+    .service-card {
+      transition: all 0.3s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 pt-20">
+
+  <!-- Header -->
+  <header id="header" class="bg-white shadow-lg fixed top-0 left-0 right-0 z-50 transition-transform duration-300">
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <!-- Logo Section -->
+        <div class="flex items-center space-x-3">
+          <div class="w-12 h-12 rounded-lg overflow-hidden">
+            <img src="https://drive.google.com/uc?export=view&id=107AFeBtOG7V0HOWe8ewH4ievIRNriIL_" alt="Ami Technology Logo" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center" style="display: none;">
+              <i class="fas fa-laptop-code text-white text-xl"></i>
+            </div>
+          </div>
+          <div>
+            <h1 class="text-2xl font-bold text-gray-800">Ami Technology</h1>
+            <p class="text-sm text-gray-600">IT Training & Support</p>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="hidden md:flex space-x-8">
+          <a href="#home" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
+          <a href="#services" class="text-gray-700 hover:text-blue-600 font-medium">Services</a>
+          <a href="#training" class="text-gray-700 hover:text-blue-600 font-medium">Training</a>
+          <a href="#contact" class="text-gray-700 hover:text-blue-600 font-medium">Contact</a>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button class="md:hidden text-gray-700" onclick="toggleMobileMenu()">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobileMenu" class="hidden md:hidden mt-4 pb-4">
+        <a href="#home" class="block py-2 text-gray-700 hover:text-blue-600">Home</a>
+        <a href="#services" class="block py-2 text-gray-700 hover:text-blue-600">Services</a>
+        <a href="#training" class="block py-2 text-gray-700 hover:text-blue-600">Training</a>
+        <a href="#contact" class="block py-2 text-gray-700 hover:text-blue-600">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="gradient-bg text-white py-20">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-5xl font-bold mb-6">Professional IT Training & Support</h2>
+      <p class="text-xl mb-8 max-w-3xl mx-auto">Master the latest technologies with expert-led training in cybersecurity, networking, and IT infrastructure. Get job-ready with personalized support and preparation.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <button onclick="scrollToSection('training')" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">
+          View Training Programs
+        </button>
+        <button onclick="openWhatsApp()" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition duration-300">
+          Get Started Today
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h3 class="text-4xl font-bold text-gray-800 mb-4">Our Services</h3>
+        <p class="text-gray-600 max-w-2xl mx-auto">Comprehensive IT training and support services designed to advance your career in technology</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="service-card bg-gray-50 p-8 rounded-xl text-center">
+          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-graduation-cap text-blue-600 text-2xl"></i>
+          </div>
+          <h4 class="text-xl font-semibold mb-4">IT Training</h4>
+          <p class="text-gray-600">Expert-led training programs in the latest technologies and industry-standard certifications</p>
+        </div>
+
+        <div class="service-card bg-gray-50 p-8 rounded-xl text-center">
+          <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-user-tie text-green-600 text-2xl"></i>
+          </div>
+          <h4 class="text-xl font-semibold mb-4">Personal Training</h4>
+          <p class="text-gray-600">One-on-one personalized training sessions tailored to your learning pace and goals</p>
+        </div>
+
+        <div class="service-card bg-gray-50 p-8 rounded-xl text-center">
+          <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-briefcase text-purple-600 text-2xl"></i>
+          </div>
+          <h4 class="text-xl font-semibold mb-4">Job Support & Preparation</h4>
+          <p class="text-gray-600">Complete job preparation including resume building, interview prep, and ongoing job support</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Training Programs Section -->
+  <section id="training" class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h3 class="text-4xl font-bold text-gray-800 mb-4">Training Programs</h3>
+        <p class="text-gray-600 max-w-2xl mx-auto">Industry-leading certification programs and hands-on training</p>
+        <div class="mt-6 bg-gradient-to-r from-green-500 to-blue-600 text-white p-4 rounded-lg inline-block">
+          <h4 class="text-xl font-bold mb-2">🎉 Special Offer: FREE ₹15,000 Worth Training!</h4>
+          <p class="text-sm">Get started with any course absolutely free. Limited time offer!</p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 cursor-pointer" onclick="showSyllabus('paloalto')">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4">
+              <i class="fas fa-shield-alt text-red-600"></i>
+            </div>
+            <h4 class="text-lg font-semibold">Palo Alto</h4>
+          </div>
+          <p class="text-gray-600">Next-generation firewall and cybersecurity platform training</p>
+          <div class="mt-4 text-blue-600 font-medium">Click to view syllabus →</div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 cursor-pointer" onclick="showSyllabus('zscaler')">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+              <i class="fas fa-cloud text-blue-600"></i>
+            </div>
+            <h4 class="text-lg font-semibold">Zscaler</h4>
+          </div>
+          <p class="text-gray-600">Cloud security and zero trust network access solutions</p>
+          <div class="mt-4 text-blue-600 font-medium">Click to view syllabus →</div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 cursor-pointer" onclick="showSyllabus('f5')">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
+              <i class="fas fa-server text-orange-600"></i>
+            </div>
+            <h4 class="text-lg font-semibold">F5</h4>
+          </div>
+          <p class="text-gray-600">Application delivery and load balancing solutions</p>
+          <div class="mt-4 text-blue-600 font-medium">Click to view syllabus →</div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 cursor-pointer" onclick="showSyllabus('checkpoint')">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+              <i class="fas fa-lock text-green-600"></i>
+            </div>
+            <h4 class="text-lg font-semibold">Checkpoint</h4>
+          </div>
+          <p class="text-gray-600">Network security and threat prevention solutions</p>
+          <div class="mt-4 text-blue-600 font-medium">Click to view syllabus →</div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 cursor-pointer" onclick="showSyllabus('fortigate')">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+              <i class="fas fa-network-wired text-purple-600"></i>
+            </div>
+            <h4 class="text-lg font-semibold">Fortigate</h4>
+          </div>
+          <p class="text-gray-600">Unified threat management and network security</p>
+          <div class="mt-4 text-blue-600 font-medium">Click to view syllabus →</div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 cursor-pointer" onclick="showSyllabus('ccna')">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mr-4">
+              <i class="fas fa-route text-indigo-600"></i>
+            </div>
+            <h4 class="text-lg font-semibold">CCNA</h4>
+          </div>
+          <p class="text-gray-600">Cisco Certified Network Associate certification training</p>
+          <div class="mt-4 text-blue-600 font-medium">Click to view syllabus →</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h3 class="text-4xl font-bold text-gray-800 mb-4">Get In Touch</h3>
+        <p class="text-gray-600 max-w-2xl mx-auto">Ready to advance your IT career? Contact us today to discuss your training needs</p>
+      </div>
+
+      <div class="max-w-4xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-12">
+          <!-- Contact Info -->
+          <div>
+            <h4 class="text-2xl font-semibold mb-6">Contact Information</h4>
+
+            <div class="space-y-6">
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                  <i class="fas fa-headset text-blue-600"></i>
+                </div>
+                <div>
+                  <h5 class="font-semibold">Customer Support</h5>
+                  <p class="text-gray-600">Available 24/7</p>
+                </div>
+              </div>
+
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+                  <i class="fas fa-phone text-green-600"></i>
+                </div>
+                <div>
+                  <h5 class="font-semibold">Phone Number</h5>
+                  <p class="text-gray-600">+91 80079 31310</p>
+                </div>
+              </div>
+
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                  <i class="fab fa-whatsapp text-purple-600"></i>
+                </div>
+                <div>
+                  <h5 class="font-semibold">WhatsApp</h5>
+                  <p class="text-gray-600">Available for instant support</p>
+                </div>
+              </div>
+            </div>
+
+            <button onclick="openWhatsApp()" class="mt-8 bg-green-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-600 transition duration-300 flex items-center">
+              <i class="fab fa-whatsapp mr-2"></i>
+              Chat on WhatsApp
+            </button>
+          </div>
+
+          <!-- Contact Form -->
+          <div>
+            <h4 class="text-2xl font-semibold mb-6">Send us a Message</h4>
+            <form class="space-y-4" onsubmit="handleFormSubmit(event)">
+              <div>
+                <label class="block text-gray-700 font-medium mb-2">Name</label>
+                <input name="name" type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Your Name" required>
+              </div>
+
+              <div>
+                <label class="block text-gray-700 font-medium mb-2">Email</label>
+                <input name="email" type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="your@email.com" required>
+              </div>
+
+              <div>
+                <label class="block text-gray-700 font-medium mb-2">Training Interest</label>
+                <select name="trainingInterest" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                  <option>Select Training Program</option>
+                  <option>Palo Alto</option>
+                  <option>Zscaler</option>
+                  <option>F5</option>
+                  <option>Checkpoint</option>
+                  <option>Fortigate</option>
+                  <option>CCNA</option>
+                  <option>Personal Training</option>
+                  <option>Job Support</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-gray-700 font-medium mb-2">Message</label>
+                <textarea name="message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Tell us about your training needs..."></textarea>
+              </div>
+
+              <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300">
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-3 gap-8">
+        <div>
+          <div class="flex items-center space-x-3 mb-4">
+            <div class="w-10 h-10 rounded-lg overflow-hidden">
+              <img src="https://drive.google.com/uc?export=view&id=107AFeBtOG7V0HOWe8ewH4ievIRNriIL_" alt="Ami Technology Logo" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center" style="display: none;">
+                <i class="fas fa-laptop-code text-white"></i>
+              </div>
+            </div>
+            <h4 class="text-xl font-bold">Ami Technology</h4>
+          </div>
+          <p class="text-gray-400">Empowering careers through professional IT training and support services.</p>
+        </div>
+
+        <div>
+          <h5 class="text-lg font-semibold mb-4">Training Programs</h5>
+          <ul class="space-y-2 text-gray-400">
+            <li>Palo Alto Training</li>
+            <li>Zscaler Certification</li>
+            <li>F5 Load Balancer</li>
+            <li>Checkpoint Security</li>
+            <li>Fortigate UTM</li>
+            <li>CCNA Certification</li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 class="text-lg font-semibold mb-4">Contact</h5>
+          <div class="space-y-2 text-gray-400">
+            <p>+91 80079 31310</p>
+            <button onclick="openWhatsApp()" class="text-green-400 hover:text-green-300">
+              <i class="fab fa-whatsapp mr-1"></i>WhatsApp Support
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+        <p>&copy; 2025 Ami Technology. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Chat Button -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <button onclick="openWhatsApp()" class="chat-bubble bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition duration-300">
+      <i class="fab fa-whatsapp text-2xl"></i>
+    </button>
+  </div>
+
+  <!-- Syllabus Modal -->
+  <div id="syllabusModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-6">
+          <h3 id="syllabusTitle" class="text-2xl font-bold text-gray-800"></h3>
+          <button onclick="closeSyllabus()" class="text-gray-500 hover:text-gray-700 text-2xl">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <div class="mb-6 bg-gradient-to-r from-green-500 to-blue-600 text-white p-4 rounded-lg">
+          <h4 class="text-lg font-bold mb-2">🎉 Special Offer: FREE ₹15,000 Worth Training!</h4>
+          <p class="text-sm">Start this course absolutely free. No hidden charges!</p>
+        </div>
+
+        <div id="syllabusContent" class="space-y-4">
+          <!-- Syllabus content will be populated here -->
+        </div>
+
+        <div class="mt-8 flex flex-col sm:flex-row gap-4">
+          <button onclick="openWhatsApp()" class="bg-green-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-600 transition duration-300 flex items-center justify-center">
+            <i class="fab fa-whatsapp mr-2"></i>
+            Enroll Now - FREE
+          </button>
+          <button onclick="closeSyllabus()" class="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 transition duration-300">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    function scrollToSection(sectionId) {
+      document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function openWhatsApp() {
+      const phoneNumber = '918007931310';
+      const message = 'Hello! I am interested in your IT training programs. Can you provide more information?';
+      const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank');
+    }
+
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      alert('Thank you for your message! We will contact you soon. For immediate assistance, please use our WhatsApp chat.');
+      openWhatsApp();
+    }
+
+    const syllabusData = {
+      paloalto: {
+        title: 'Palo Alto Networks Training',
+        content: [
+          { module: 'Module 1: Introduction to Palo Alto Networks', topics: ['Overview of Palo Alto Networks', 'Next-Generation Firewall Concepts', 'PAN-OS Architecture', 'Initial Setup and Configuration'] },
+          { module: 'Module 2: Security Policies and Objects', topics: ['Security Policy Rules', 'Address Objects and Groups', 'Service Objects', 'Application Objects'] },
+          { module: 'Module 3: Network Address Translation (NAT)', topics: ['NAT Policy Rules', 'Source NAT', 'Destination NAT', 'Bi-directional NAT'] },
+          { module: 'Module 4: User Identification', topics: ['User-ID Agent', 'Captive Portal', 'GlobalProtect Integration', 'LDAP Authentication'] },
+          { module: 'Module 5: Threat Prevention', topics: ['Antivirus Protection', 'Anti-Spyware', 'Vulnerability Protection', 'URL Filtering', 'File Blocking'] },
+          { module: 'Module 6: Monitoring and Reporting', topics: ['Traffic Logs', 'Threat Logs', 'System Logs', 'Custom Reports', 'Dashboard Configuration'] }
+        ]
+      },
+      zscaler: {
+        title: 'Zscaler Cloud Security Training',
+        content: [
+          { module: 'Module 1: Zscaler Architecture', topics: ['Cloud Security Platform Overview', 'Zscaler Internet Access (ZIA)', 'Zscaler Private Access (ZPA)', 'Zero Trust Network Access'] },
+          { module: 'Module 2: Web Security', topics: ['URL Filtering', 'SSL Inspection', 'Advanced Threat Protection', 'Data Loss Prevention'] },
+          { module: 'Module 3: Cloud Firewall', topics: ['Firewall Policies', 'Intrusion Prevention', 'DNS Security', 'Cloud Sandbox'] },
+          { module: 'Module 4: User and Device Management', topics: ['User Authentication', 'Device Trust', 'Location Policies', 'Mobile Device Management'] },
+          { module: 'Module 5: Private Access (ZPA)', topics: ['Application Segmentation', 'Connector Deployment', 'Access Policies', 'Micro-tunnels'] },
+          { module: 'Module 6: Analytics and Reporting', topics: ['Security Analytics', 'User Risk Scoring', 'Compliance Reporting', 'Dashboard Management'] }
+        ]
+      },
+      f5: {
+        title: 'F5 Load Balancer Training',
+        content: [
+          { module: 'Module 1: F5 BIG-IP Fundamentals', topics: ['F5 Architecture Overview', 'TMOS Operating System', 'Initial Setup and Licensing', 'Network Configuration'] },
+          { module: 'Module 2: Load Balancing Concepts', topics: ['Virtual Servers', 'Pools and Pool Members', 'Load Balancing Methods', 'Health Monitors'] },
+          { module: 'Module 3: SSL/TLS Management', topics: ['SSL Certificates', 'SSL Profiles', 'SSL Offloading', 'SSL Bridging'] },
+          { module: 'Module 4: Application Services', topics: ['HTTP Profiles', 'TCP Profiles', 'Persistence Methods', 'Connection Limits'] },
+          { module: 'Module 5: High Availability', topics: ['Device Service Clustering', 'Active-Standby Configuration', 'Active-Active Setup', 'Failover Scenarios'] },
+          { module: 'Module 6: Monitoring and Troubleshooting', topics: ['Performance Monitoring', 'Log Analysis', 'SNMP Configuration', 'Troubleshooting Tools'] }
+        ]
+      },
+      checkpoint: {
+        title: 'Check Point Security Training',
+        content: [
+          { module: 'Module 1: Check Point Architecture', topics: ['Security Management Architecture', 'Security Gateway', 'SmartConsole Overview', 'Gaia Operating System'] },
+          { module: 'Module 2: Security Policies', topics: ['Access Control Policies', 'Network Objects', 'Service Objects', 'Policy Installation'] },
+          { module: 'Module 3: Network Address Translation', topics: ['Static NAT', 'Hide NAT', 'Manual NAT Rules', 'Automatic NAT Rules'] },
+          { module: 'Module 4: VPN Configuration', topics: ['Site-to-Site VPN', 'Remote Access VPN', 'VPN Communities', 'Encryption Domains'] },
+          { module: 'Module 5: Threat Prevention', topics: ['IPS Blade', 'Anti-Bot Blade', 'Anti-Virus Blade', 'Threat Emulation', 'URL Filtering'] },
+          { module: 'Module 6: Monitoring and Logs', topics: ['SmartView Tracker', 'SmartEvent', 'Log Correlation', 'Security Reports'] }
+        ]
+      },
+      fortigate: {
+        title: 'FortiGate UTM Training',
+        content: [
+          { module: 'Module 1: FortiGate Fundamentals', topics: ['FortiOS Overview', 'Initial Configuration', 'Interface Configuration', 'Routing Setup'] },
+          { module: 'Module 2: Security Policies', topics: ['Firewall Policies', 'Address Objects', 'Service Objects', 'Policy Scheduling'] },
+          { module: 'Module 3: User Authentication', topics: ['Local User Database', 'LDAP Authentication', 'RADIUS Integration', 'SSO Methods'] },
+          { module: 'Module 4: UTM Features', topics: ['Antivirus Protection', 'Web Filtering', 'Application Control', 'IPS Configuration'] },
+          { module: 'Module 5: VPN Configuration', topics: ['IPSec VPN', 'SSL VPN', 'Site-to-Site Tunnels', 'Remote Access Setup'] },
+          { module: 'Module 6: High Availability', topics: ['Active-Passive HA', 'Active-Active HA', 'Cluster Configuration', 'Failover Testing'] }
+        ]
+      },
+      ccna: {
+        title: 'CCNA Certification Training',
+        content: [
+          { module: 'Module 1: Network Fundamentals', topics: ['OSI Model', 'TCP/IP Protocol Suite', 'Ethernet Standards', 'Network Topologies'] },
+          { module: 'Module 2: Network Access', topics: ['VLANs and Trunking', 'EtherChannel', 'Spanning Tree Protocol', 'Wireless Fundamentals'] },
+          { module: 'Module 3: IP Connectivity', topics: ['IPv4 and IPv6 Addressing', 'Subnetting and VLSM', 'Static and Dynamic Routing', 'OSPF and EIGRP'] },
+          { module: 'Module 4: IP Services', topics: ['DHCP Configuration', 'DNS Services', 'NAT and PAT', 'NTP Configuration'] },
+          { module: 'Module 5: Security Fundamentals', topics: ['Access Control Lists (ACLs)', 'Security Best Practices', 'Device Hardening', 'VPN Basics'] },
+          { module: 'Module 6: Automation and Programmability', topics: ['Network Automation', 'REST APIs', 'JSON and XML', 'Python for Network Engineers'] }
+        ]
+      }
+    };
+
+    function showSyllabus(courseId) {
+      const course = syllabusData[courseId];
+      if (!course) return;
+
+      document.getElementById('syllabusTitle').textContent = course.title;
+      const contentDiv = document.getElementById('syllabusContent');
+      contentDiv.innerHTML = '';
+
+      course.content.forEach(module => {
+        const moduleDiv = document.createElement('div');
+        moduleDiv.className = 'bg-gray-50 p-4 rounded-lg';
+
+        const moduleTitle = document.createElement('h4');
+        moduleTitle.className = 'text-lg font-semibold text-gray-800 mb-3';
+        moduleTitle.textContent = module.module;
+
+        const topicsList = document.createElement('ul');
+        topicsList.className = 'space-y-1';
+
+        module.topics.forEach(topic => {
+          const listItem = document.createElement('li');
+          listItem.className = 'text-gray-600 flex items-center';
+          listItem.innerHTML = `<i class="fas fa-check-circle text-green-500 mr-2"></i>${topic}`;
+          topicsList.appendChild(listItem);
+        });
+
+        moduleDiv.appendChild(moduleTitle);
+        moduleDiv.appendChild(topicsList);
+        contentDiv.appendChild(moduleDiv);
+      });
+
+      document.getElementById('syllabusModal').classList.remove('hidden');
+    }
+
+    function closeSyllabus() {
+      document.getElementById('syllabusModal').classList.add('hidden');
+    }
+
+    let lastScrollTop = 0;
+    const header = document.getElementById('header');
+
+    window.addEventListener('scroll', function () {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      if (scrollTop > lastScrollTop && scrollTop > 100) {
+        header.style.transform = 'translateY(-100%)';
+      } else {
+        header.style.transform = 'translateY(0)';
+      }
+      lastScrollTop = scrollTop;
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+```
+
+---
+
+✅ **This is a complete, standalone HTML file** – just save it as `index.html` and open in any browser.  
+✅ All features work: mobile menu, syllabus modal, WhatsApp integration, smooth scrolling, animations.  
+✅ No external dependencies beyond CDN-hosted Tailwind and Font Awesome.
+
+Let me know if you'd like a **backend version** (Node.js/Express) to handle form submissions!
